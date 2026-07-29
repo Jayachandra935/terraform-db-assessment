@@ -38,7 +38,7 @@ module "rds" {
 
   vpc_id = module.network.vpc_id
 
-  private_subnet_ids = module.network.private_subnet_ids
+  private_subnet_ids    = module.network.private_subnet_ids
   rds_security_group_id = module.security.rds_security_group_id
 
   db_username = var.db_username

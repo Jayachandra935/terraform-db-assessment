@@ -42,8 +42,8 @@ resource "aws_ecs_task_definition" "app" {
 
   network_mode = "awsvpc"
 
-  cpu = var.environment == "prod" ? 512 : 256
-  memory = var.environment == "prod" ? 1024 : 512
+  cpu                = var.environment == "prod" ? 512 : 256
+  memory             = var.environment == "prod" ? 1024 : 512
   execution_role_arn = aws_iam_role.ecs_execution_role.arn
 
   container_definitions = jsonencode([
