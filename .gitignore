@@ -1,0 +1,28 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Keep provider versions for reproducible builds
+# (Do NOT ignore .terraform.lock.hcl)
+
+# Local Terraform variables
+*.tfvars
+!*.tfvars.example
+
+# Environment files
+.env
+.env.*
+
+# Database backups
+backups/*.sql
+
+# VS Code
+.vscode/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
