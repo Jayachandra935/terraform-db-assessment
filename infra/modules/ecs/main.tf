@@ -1,10 +1,14 @@
 resource "aws_cloudwatch_log_group" "ecs" {
   name              = "/ecs/${var.project_name}-${var.environment}"
-  retention_in_days = 7
+  retention_in_days = 365
 }
 
 resource "aws_ecs_cluster" "main" {
   name = "${var.project_name}-${var.environment}"
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
 }
 
 resource "aws_iam_role" "ecs_execution_role" {
@@ -83,9 +87,7 @@ resource "aws_ecs_task_definition" "app" {
 
 resource "aws_ecs_service" "main" {
 
-  name = "${var.project_name}-${var.environment}"
-
-  cluster = aws_ecs_cluster.main.id
+   name = "${var.project_name}-${var.environment}"
 
   task_definition = aws_ecs_task_definition.app.arn
 
