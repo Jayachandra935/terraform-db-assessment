@@ -18,6 +18,7 @@ resource "aws_db_instance" "postgres" {
 
   engine            = "postgres"
   engine_version    = "16"
+  auto_minor_version_upgrade = true
   instance_class    = var.environment == "prod" ? "db.t3.small" : "db.t3.micro"
   allocated_storage = 20
   storage_type      = "gp3"
@@ -32,9 +33,13 @@ resource "aws_db_instance" "postgres" {
   publicly_accessible = false
 
   storage_encrypted = true
+  
+  performance_insights_enabled = true
 
   backup_retention_period = var.environment == "prod" ? 7 : 1
 
+  multi_az = var.environment == "prod" ? true : false
+  
   deletion_protection = var.environment == "prod" ? true : false
 
   skip_final_snapshot = var.environment == "dev" ? true : false

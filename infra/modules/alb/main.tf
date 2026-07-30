@@ -6,6 +6,8 @@ resource "aws_lb" "main" {
 
   load_balancer_type = "application"
 
+  enable_deletion_protection = var.environment == "prod" ? true : false
+
   security_groups = [
     var.alb_security_group_id
   ]
