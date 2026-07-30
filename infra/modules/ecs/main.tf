@@ -5,6 +5,10 @@ resource "aws_cloudwatch_log_group" "ecs" {
 
 resource "aws_ecs_cluster" "main" {
   name = "${var.project_name}-${var.environment}"
+  setting {
+    name  = "containerInsights"
+    value = "enabled"
+  }
 }
 
 resource "aws_iam_role" "ecs_execution_role" {
@@ -84,12 +88,6 @@ resource "aws_ecs_task_definition" "app" {
 resource "aws_ecs_service" "main" {
 
    name = "${var.project_name}-${var.environment}"
-
-  setting {
-    name  = "containerInsights"
-    value = "enabled"
-  cluster = aws_ecs_cluster.main.id
-  }
 
   task_definition = aws_ecs_task_definition.app.arn
 
